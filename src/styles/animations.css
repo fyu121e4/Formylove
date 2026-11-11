@@ -1,0 +1,42 @@
+@keyframes float-up {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--o, 0.5); }
+  90%  { opacity: var(--o, 0.5); }
+  100% { transform: translate3d(var(--drift, 0px), -115vh, 0) rotate(25deg); opacity: 0; }
+}
+@keyframes float-down {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--o, 0.5); }
+  90%  { opacity: var(--o, 0.5); }
+  100% { transform: translate3d(var(--drift, 0px), 115vh, 0) rotate(-25deg); opacity: 0; }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50%      { opacity: 0.9; transform: scale(1.1); }
+}
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1); }
+}
+@keyframes pulse-heart {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.15); }
+}
+
+.animate-sway { transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; }
+.animate-twinkle { animation: twinkle 3.5s ease-in-out infinite; }
+.animate-pulse-heart { animation: pulse-heart 2.4s ease-in-out infinite; }
+.eq-bar { width: 3px; height: 14px; background: currentColor; transform-origin: bottom; animation: eq 0.9s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

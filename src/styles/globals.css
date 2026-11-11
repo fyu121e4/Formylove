@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: #8B2E29;
+  color: #FFFAF5;
+  font-family: 'Nunito', system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+button { font-family: inherit; }
+:focus-visible { outline: 3px solid #F4B6C2; outline-offset: 3px; border-radius: 8px; }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-wine px-7 py-3 text-base font-extrabold text-warm shadow-lg transition hover:scale-105 hover:bg-wine-deep active:scale-95;
+  }
+  .btn-soft {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-rose px-7 py-3 text-base font-extrabold text-wine shadow-lg transition hover:scale-105 hover:bg-rose-soft active:scale-95;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-rose/70 px-7 py-3 text-base font-extrabold text-rose transition hover:bg-rose/15 active:scale-95;
+  }
+}
+
+/* Papel con renglones y textura sutil */
+.paper-texture {
+  background-color: #FFFAF5;
+  background-image:
+    repeating-linear-gradient(transparent 0 31px, rgba(244, 182, 194, 0.4) 31px 32px),
+    radial-gradient(rgba(139, 46, 41, 0.06) 1px, transparent 1px);
+  background-size: auto, 14px 14px;
+  box-shadow: inset 0 0 0 2px rgba(139, 46, 41, 0.12);
+}
+/* Borde inferior rasgado */
+.torn-bottom {
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 22px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 22px 100%;
+  padding-bottom: 3.5rem;
+}
+/* Cinta adhesiva */
+.tape {
+  position: absolute;
+  width: 84px;
+  height: 26px;
+  background: repeating-linear-gradient(45deg, rgba(244, 182, 194, 0.85) 0 6px, rgba(248, 215, 220, 0.85) 6px 12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+/* Papel mate, capas del album y acabado del tocadiscos. */
+.polaroid, .film-frame, .album-stack::before, .album-stack::after {
+  background-color: #fffaf1;
+  background-image: radial-gradient(#8b2e2912 .65px, transparent .8px), linear-gradient(145deg, #fffaf5, #f5e6d6);
+  background-size: 4px 4px, auto;
+  border: 1px solid #fffaf5;
+  border-radius: 5px 3px 7px 4px;
+  box-shadow: inset 0 0 0 2px #8b2e2910, 0 2px 3px #45150e35, 0 18px 28px -8px #45150e65;
+}
+.album-stack { isolation: isolate; perspective: 900px; }
+.album-stack::before, .album-stack::after {
+  content: '';
+  position: absolute;
+  inset: 4% 1% 0;
+  z-index: -1;
+  transform: rotate(5deg) translate(6px, 3px);
+}
+.album-stack::after { z-index: -2; transform: rotate(-6deg) translate(-6px, 2px); }
+.polaroid > div { box-shadow: inset 0 0 0 1px #45150e50; }
+.tape { clip-path: polygon(0 0, 100% 4%, 96% 22%, 100% 39%, 96% 57%, 100% 76%, 97% 100%, 0 96%, 4% 75%, 0 52%, 4% 32%); }
+.paper-texture { box-shadow: inset 0 0 0 2px #8b2e291a, inset 0 10px 32px #ad675617; }
+.music-room {
+  background: radial-gradient(ellipse at 26% 24%, #b65963 0%, #792f36 37%, #3d181d 82%);
+}
+.music-room-harvey {
+  background: radial-gradient(ellipse at 22% 30%, #b76269 0%, #702c37 37%, #2e141c 85%);
+}
+.turntable {
+  padding: 8%;
+  border: 1px solid #f8d7dc66;
+  border-radius: 11% 9% 12% 8%;
+  background: linear-gradient(145deg, #cf8c89, #9a4349 55%, #622633);
+  box-shadow: inset 0 2px 3px #fffaf580, inset 0 -6px 0 #48181f50, 0 12px 18px #210c1450, 0 30px 40px -18px #210c14cc;
+}
+.player-panel {
+  border: 1px solid #f8d7dc4a;
+  background: linear-gradient(145deg, #fffaf519, #3d181d7a);
+  box-shadow: inset 0 1px 1px #fffaf549, 0 18px 32px -12px #210c14a0;
+}
+.vinyl-disc {
+  box-shadow: inset 0 0 0 3px #ffffff13, 0 5px 0 #111, 0 16px 20px #210c14a0;
+  animation: spin-record 3s linear infinite paused;
+}
+.vinyl-disc[data-playing='true'] { animation-play-state: running; }
+@keyframes spin-record { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .vinyl-disc[data-playing] { animation: none; }
+}
+
+.sticker-paper {
+  border-radius: 22% 24% 20% 24%;
+  background: linear-gradient(150deg, #fffaf5, #faeddf);
+  box-shadow: inset 0 0 0 1px #fff, 1px 2px 2px #3d181d30, 4px 8px 14px #3d181d55;
+}
+.floating-petal {
+  display: block;
+  border-radius: 80% 15% 70% 36%;
+  box-shadow: inset 1px -2px 4px #8b2e293b;
+}
+.letter-sheet { transition: translate .25s ease, filter .25s ease; }
+@media (hover: hover) {
+  .letter-sheet:hover { translate: 0 -3px; filter: drop-shadow(0 18px 22px #6e232050); }
+}
+.scrapbook-decorations {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.scrapbook-piece {
+  position: absolute;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(2px 5px 3px #32130f45);
+}
+.scrapbook-bouquet {
+  width: clamp(100px, 12vw, 170px);
+  left: 5%;
+  top: 25%;
+  transform: rotate(-15deg);
+}
+.scrapbook-ribbon {
+  width: clamp(70px, 8vw, 112px);
+  right: 9%;
+  top: 16%;
+  transform: rotate(12deg);
+}
+.scrapbook-ticket {
+  width: clamp(125px, 15vw, 195px);
+  right: 4%;
+  bottom: 27%;
+  transform: rotate(9deg);
+}
+.scrapbook-envelope {
+  width: clamp(86px, 10vw, 130px);
+  left: 9%;
+  bottom: 21%;
+  transform: rotate(-12deg);
+}
+.scrapbook-heart {
+  width: clamp(50px, 6vw, 82px);
+  right: 21%;
+  bottom: 7%;
+  transform: rotate(-14deg);
+}
+@media (max-width: 1050px) {
+  .scrapbook-bouquet { width: 94px; left: 1%; top: 31%; opacity: .85; }
+  .scrapbook-ticket { width: 125px; right: 1%; bottom: 15%; }
+  .scrapbook-envelope { left: 2%; bottom: 10%; }
+  .scrapbook-ribbon { right: 3%; top: 10%; }
+}
+@media (max-width: 639px) {
+  .scrapbook-bouquet { width: 68px; left: -5px; top: 23%; opacity: .7; }
+  .scrapbook-ribbon { width: 54px; right: 5px; top: 8%; opacity: .8; }
+  .scrapbook-ticket { width: 105px; right: 10px; bottom: 7%; opacity: .85; }
+  .scrapbook-envelope { display: none; }
+  .scrapbook-heart { width: 43px; left: 7%; right: auto; bottom: 17%; opacity: .75; }
+}
+
+/* Touch layouts and a quiet reading surface on the final screen. */
+html { -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+.screen-scroll {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-top: 5rem;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.story-navigation {
+  top: max(.5rem, env(safe-area-inset-top, 0px));
+  max-width: calc(100% - 1rem);
+  gap: 0;
+  padding: .25rem .5rem;
+}
+.letter-copy { overflow-wrap: anywhere; }
+.final-screen .scrapbook-decorations { opacity: .35; }
+.final-screen .animate-pulse-heart,
+.final-screen .animate-sway,
+.final-screen .animate-twinkle { animation: none; }
+.final-letter .letter-sheet { transform: none !important; translate: none; }
+@media (max-width: 639px) {
+  .paper-texture { padding-inline: 1.25rem; }
+  .letter-copy { font-size: 1.375rem; line-height: 1.5; }
+  .letter-sheet { transform: none !important; filter: none; }
+  .sticker-paper { max-width: 64px; max-height: 64px; }
+  .animate-sway, .animate-pulse-heart, .animate-twinkle { animation: none; }
+  .scrapbook-piece { filter: none; }
+  .final-screen .scrapbook-decorations { display: none; }
+  .player-panel { min-width: 0; }
+  .player-panel h3 { white-space: normal; overflow-wrap: anywhere; }
+  input[type='range'] { min-height: 32px; touch-action: pan-y; }
+  button { touch-action: manipulation; }
+  .final-letter { padding-top: 2.5rem; }
+  .final-screen .film-frame { transform: none !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .animate-sway, .animate-pulse-heart, .animate-twinkle { animation: none; }
+}
